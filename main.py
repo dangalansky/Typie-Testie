@@ -1,53 +1,41 @@
 import time
 import random
+from difflib import SequenceMatcher
 
-# open paragraphs.txt file
+
 with open('paragraphs.txt') as data:
     paragraphs = data.readlines()
 
-# choose random sentence
-def choose_text():
-n = random.randint(0, len(paragraphs)-1)
-to_type = paragraphs[n]
 
-# calculate word count and character count
-word_count = len(list(to_type.split(" ")))
-word_list = list(to_type.split(" "))
-char_list = [char for char in to_type]
-char_count = len(char_list)
-
-
-print(to_type)
-return_type = input(f"Type the following and press return: \n{to_type}\n")
-
-return_list = [char for char in return_type]
-return_count = len(return_list)
-
-
-# accuracy check
-def accuracy_check(char_list, return_list)
-    inaccuracy = 0
-
-    for character in char_list:
-        if character not in return_list:
-            inaccuracy += 1
-
-    for character in return_list:
-        if character not in char_list:
-            inaccuracy += 1
-
-    if return_type == to_type:
-        accuracy = 100
-    else:
-        accuracy = int((return_count / char_count) * 100)
-
+def accuracy_check(return_type, to_type):
+    ratio = SequenceMatcher(None, return_type, to_type).ratio()
+    accuracy = int(ratio * 100)
     return accuracy
 
 
+def calculate_wpm(now, then, char_count):
+    word_count = char_count / 5
+    minutes = (now - then) / 60
+    wpm = int(word_count / minutes)
+    return wpm
 
 
+def game_play():
+    n = random.randint(0, len(paragraphs) - 1)
+    to_type = paragraphs[n]
+    then = time.time()
+    return_type = input(f"Type the following and press return when finished: \n{to_type}\n")
+    now = time.time()
+    return_list = [char for char in return_type]
+    char_count = len(return_list)
+    accuracy = accuracy_check(return_type, to_type)
+    wpm = calculate_wpm(now, then, char_count)
 
-input(f"Type the following and press return: \n{type}\n")
-after_time = time.time()
-time = int(now-then)/60
-print(f'Shit! took ya {time}sec to type.')
+    print(f'Accuracy: {accuracy}%')
+    print(f'You typed {wpm} wpm')
+
+    again = input('\nWould you like to play again? Y or N: ')
+    if again.lower() == 'y':
+        game_play()
+
+game_play()
