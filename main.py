@@ -31,11 +31,10 @@ def game_play():
     accuracy = accuracy_check(return_type, to_type)
     wpm = calculate_wpm(now, then, char_count)
 
-    print(f'Accuracy: {accuracy}%')
-    print(f'You typed {wpm} wpm')
+
 
     again = input('\nWould you like to play again? Y or N: ')
     if again.lower() == 'y':
         game_play()
 
-game_play()
+
