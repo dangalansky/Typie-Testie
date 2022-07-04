@@ -1,7 +1,8 @@
 from main import *
+import random
+import time
 from tkinter import *
 from PIL import ImageTk, Image
-from tkinter import filedialog, messagebox
 
 
 # ------------ Functions ------------- #
