@@ -1,4 +1,4 @@
-from main import *
+from backend_functions import *
 import random
 import time
 from tkinter import *
