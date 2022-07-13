@@ -1,4 +1,4 @@
-# Typing-Test
+# Typie-Testie!
 
 A GUI-based typing-test program that measures speed and accuracy.
 
